@@ -46,6 +46,12 @@ namespace JT808.Protocol.Extensions.JTActiveSafety.MessageBody
             value.AttachmentServerIPUdpPort = reader.ReadUInt16();
             writer.WriteNumber($"[{value.AttachmentServerIPUdpPort.ReadNumber()}]UDP端口", value.AttachmentServerIPUdpPort);
             value.AlarmIdentification = new AlarmIdentificationProperty();
+
+            // added by Wu Xuehui
+            var rawAlarmIdHex = reader.ReadVirtualArray(16).ToArray();
+            value.AlarmIdentification.RawHex = rawAlarmIdHex;
+            value.AlarmIdentification.RawString = rawAlarmIdHex.ToHexString();
+
             string terminalIDHex = reader.ReadVirtualArray(7).ToArray().ToHexString();
             value.AlarmIdentification.TerminalID = reader.ReadString(7);
             value.AlarmIdentification.Time = reader.ReadDateTime6();
@@ -71,8 +77,14 @@ namespace JT808.Protocol.Extensions.JTActiveSafety.MessageBody
             value.AttachmentServerIP = reader.ReadString(value.AttachmentServerIPLength);
             value.AttachmentServerIPTcpPort = reader.ReadUInt16();
             value.AttachmentServerIPUdpPort = reader.ReadUInt16();
+
+            var rawAlarmIdHex = reader.ReadVirtualArray(16).ToArray();
             value.AlarmIdentification = new AlarmIdentificationProperty
             {
+                // added by Wu Xuehui
+                RawHex = rawAlarmIdHex,
+                RawString = rawAlarmIdHex.ToHexString(),
+
                 TerminalID = reader.ReadString(7),
                 Time = reader.ReadDateTime6(),
                 SN = reader.ReadByte(),
@@ -95,11 +107,18 @@ namespace JT808.Protocol.Extensions.JTActiveSafety.MessageBody
             {
                 throw new NullReferenceException($"{nameof(AlarmIdentificationProperty)}不为空");
             }
+
+            // added by Wu Xuehui
+            writer.WriteArray(value.AlarmIdentification.RawHex);
+            /*
+             * commented by Wu Xuehui
+             * 
             writer.WriteString(value.AlarmIdentification.TerminalID);
             writer.WriteDateTime6(value.AlarmIdentification.Time);
             writer.WriteByte(value.AlarmIdentification.SN);
             writer.WriteByte(value.AlarmIdentification.AttachCount);
             writer.WriteByte(value.AlarmIdentification.Retain);
+            */
             writer.WriteString(value.AlarmId);
             writer.WriteArray(value.Retain);
         }

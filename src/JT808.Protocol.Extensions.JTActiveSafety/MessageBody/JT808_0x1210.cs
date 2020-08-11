@@ -54,6 +54,12 @@ namespace JT808.Protocol.Extensions.JTActiveSafety.MessageBody
             value.MakerID = reader.ReadString(7);
             writer.WriteString($"[{makerIdHex}]制造商Id", value.MakerID);
             value.AlarmIdentification = new AlarmIdentificationProperty();
+
+            // added by Wu Xuehui
+            var rawAlarmIdHex = reader.ReadVirtualArray(16).ToArray();
+            value.AlarmIdentification.RawHex = rawAlarmIdHex;
+            value.AlarmIdentification.RawString = rawAlarmIdHex.ToHexString();
+
             string terminalIDHex = reader.ReadVirtualArray(7).ToArray().ToHexString();
             value.AlarmIdentification.TerminalID = reader.ReadString(7);
             value.AlarmIdentification.Time = reader.ReadDateTime6();
@@ -96,8 +102,14 @@ namespace JT808.Protocol.Extensions.JTActiveSafety.MessageBody
         {
             JT808_0x1210 value = new JT808_0x1210();
             value.MakerID = reader.ReadString(7);
+
+            var rawAlarmIdHex = reader.ReadVirtualArray(16).ToArray();
             value.AlarmIdentification = new AlarmIdentificationProperty
             {
+                // added by Wu Xuehui
+                RawHex = rawAlarmIdHex,
+                RawString = rawAlarmIdHex.ToHexString(),
+
                 TerminalID = reader.ReadString(7),
                 Time = reader.ReadDateTime6(),
                 SN = reader.ReadByte(),
@@ -129,11 +141,18 @@ namespace JT808.Protocol.Extensions.JTActiveSafety.MessageBody
             {
                 throw new NullReferenceException($"{nameof(AlarmIdentificationProperty)}不为空");
             }
+
+            // added by Wu Xuehui
+            writer.WriteArray(value.AlarmIdentification.RawHex);
+            /*
+             * commented by Wu Xuehui
+             * 
             writer.WriteString(value.AlarmIdentification.TerminalID);
             writer.WriteDateTime6(value.AlarmIdentification.Time);
             writer.WriteByte(value.AlarmIdentification.SN);
             writer.WriteByte(value.AlarmIdentification.AttachCount);
             writer.WriteByte(value.AlarmIdentification.Retain);
+            */
             writer.WriteString(value.AlarmId);
             writer.WriteByte(value.InfoType);
             if (value.AttachInfos != null && value.AttachInfos.Count > 0)

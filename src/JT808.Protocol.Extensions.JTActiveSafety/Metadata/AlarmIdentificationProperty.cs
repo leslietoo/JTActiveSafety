@@ -10,6 +10,16 @@ namespace JT808.Protocol.Extensions.JTActiveSafety.Metadata
     public class AlarmIdentificationProperty
     {
         /// <summary>
+        /// 原始值，16个字节
+        /// </summary>
+        public byte[] RawHex { get; set; }
+
+        /// <summary>
+        /// 原始值，用16进制字符串表示的16个字节，形如F1BA83…
+        /// </summary>
+        public string RawString { get; set; }
+
+        /// <summary>
         /// 终端ID
         /// </summary>
         public string TerminalID { get; set; }

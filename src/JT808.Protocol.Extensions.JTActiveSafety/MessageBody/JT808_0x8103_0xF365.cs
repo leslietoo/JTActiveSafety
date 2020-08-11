@@ -3,6 +3,7 @@ using JT808.Protocol.Formatters;
 using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessageBody;
 using JT808.Protocol.MessagePack;
+using Newtonsoft.Json;
 using System;
 using System.Text.Json;
 
@@ -11,142 +12,221 @@ namespace JT808.Protocol.Extensions.JTActiveSafety.MessageBody
     /// <summary>
     /// 驾驶员状态监测系统参数
     /// </summary>
+    [JsonObject(MemberSerialization.OptIn)]
     public class JT808_0x8103_0xF365 : JT808_0x8103_BodyBase, IJT808MessagePackFormatter<JT808_0x8103_0xF365>, IJT808Analyze
     {
         public override uint ParamId { get; set; } = JT808_JTActiveSafety_Constants.JT808_0X8103_0xF365;
         public override byte ParamLength { get; set; }
+
         /// <summary>
         /// 报警判断速度阈值
         /// </summary>
+        [JsonProperty("alarmSpdLimit")]
         public byte AlarmJudgeSpeedThreshold { get; set; }
+
         /// <summary>
         /// 报警提示音量
         /// </summary>
+        [JsonProperty("alarmVol")]
         public byte WarningVolume { get; set; }
+
         /// <summary>
         /// 主动拍照策略
         /// </summary>
+        [JsonProperty("activeShotStrategy")]
         public byte ActivePhotographyStrategy { get; set; }
+
         /// <summary>
         /// 主动定时拍照时间间隔
         /// </summary>
+        [JsonProperty("activeShotTimeIntvl")]
         public ushort ActivelyTimePhotoInterval { get; set; }
+
         /// <summary>
         /// 主动定距拍照距离间隔
         /// </summary>
+        [JsonProperty("activeShotDistIntvl")]
         public ushort ActiveDistancePhotographyDistanceInterval { get; set; }
+
         /// <summary>
         /// 单次主动拍照张数
         /// </summary>
+        [JsonProperty("eachShotPicCnt")]
         public byte SingleInitiativePhotos { get; set; }
+
         /// <summary>
         /// 单次主动拍照时间间隔
         /// </summary>
+        [JsonProperty("eachShotPicIntvl")]
         public byte SingleInitiativePhotosInterval { get; set; }
+
         /// <summary>
         /// 拍照分辨率
         /// </summary>
+        [JsonProperty("picRes")]
         public byte PhotoResolution { get; set; }
+
         /// <summary>
         /// 视频录制分辨率
         /// </summary>
+        [JsonProperty("videoRes")]
         public byte VideoRecordingResolution { get; set; }
+
         /// <summary>
         /// 报警使能
         /// </summary>
+        [JsonProperty("alarmEnable")]
         public uint AlarmEnable { get; set; }
+
         /// <summary>
         /// 事件使能
         /// </summary>
+        [JsonProperty("eventEnable")]
         public uint EventEnable { get; set; }
+
         /// <summary>
         /// 吸烟报警判断时间间隔
         /// </summary>
+        [JsonProperty("smokeAlarmIntvl")]
         public ushort TimeIntervalSmokingAlarmJudgment { get; set; }
+
         /// <summary>
         /// 接打电话报警判断时间间隔
         /// </summary>
+        [JsonProperty("phoneAlarmIntvl")]
         public ushort CallAlarmDetermineTimeInterval{ get; set; }
+
         /// <summary>
         /// 预留字段
         /// </summary>
         public byte[] Reserve { get; set; } = new byte[3];
+
         /// <summary>
         /// 疲劳驾驶报警分级速度阈值
         /// </summary>
+        [JsonProperty("fatigueAlarmLevelSpdLimit")]
         public byte GradedSpeedThresholdFatigueDrivingAlarm { get; set; }
+
         /// <summary>
         /// 疲劳驾驶报警前后视频录制时间
         /// </summary>
+        [JsonProperty("fatigueAlarmVideoBnA")]
         public byte VideoRecordingTimeBeforeAndAfterFatigueDrivingAlarm { get; set; }
+
         /// <summary>
         /// 疲劳驾驶报警拍照张数
         /// </summary>
+        [JsonProperty("fatigueAlarmPicCnt")]
         public byte FatigueDrivingAlarmPhotograph { get; set; }
+
         /// <summary>
         /// 疲劳驾驶报警拍照间隔时间
         /// </summary>
+        [JsonProperty("fatigueAlarmShotIntvl")]
         public byte FatigueDrivingAlarmPhotographInterval { get; set; }
+
         /// <summary>
         /// 接打电话报警分级速度阈值
         /// </summary>
+        [JsonProperty("phoneAlarmLevelSpdLimit")]
         public byte ClassifiedSpeedThresholdCallAlarm{ get; set; }
+
         /// <summary>
         /// 接打电话报警前后视频录制时间
         /// </summary>
+        [JsonProperty("phoneAlarmVideoBnA")]
         public byte VideoRecordingTimeBeforeAndAfterCallAlarm{ get; set; }
+
         /// <summary>
         /// 接打电话报警拍驾驶员面部特征照片张数
         /// </summary>
+        [JsonProperty("phoneAlarmPicCnt")]
         public byte CallAlarmTakePicturesDriverFacialFeatures{ get; set; }
+
         /// <summary>
         /// 接打电话报警拍驾驶员面部特征照片间隔时间
         /// </summary>
+        [JsonProperty("phoneAlarmPicIntvl")]
         public byte CallAlarmTakePicturesDriverFacialFeaturesInterval { get; set; }
+
         /// <summary>
         /// 抽烟报警分级车速阈值
         /// </summary>
+        [JsonProperty("smokeAlarmLevelSpdLimit")]
         public byte ClassifiedSpeedThresholdSmokingAlarm{ get; set; }
+
         /// <summary>
         /// 抽烟报警前后视频录制时间
         /// </summary>
+        [JsonProperty("smokeAlarmVideoBnA")]
         public byte VideoRecordingTimeBeforeAndAfterSmokingAlarm{ get; set; }
+
         /// <summary>
         /// 抽烟报警拍驾驶员面部特征照片张数
         /// </summary>
+        [JsonProperty("smokeAlarmPicCnt")]
         public byte SmokingAlarmPhotographsDriverFaceCharacteristics { get; set; }
+
         /// <summary>
         /// 抽烟报警拍驾驶员面部特征照片间隔时间
         /// </summary>
+        [JsonProperty("smokeAlarmPicIntvl")]
         public byte SmokingAlarmPhotographsDriverFaceCharacteristicsInterval { get; set; }
+
         /// <summary>
         /// 分神驾驶报警分级车速阈值
         /// </summary>
+        [JsonProperty("distractAlarmLevelSpdLimit")]
         public byte ClassifiedSpeedThresholdDistractedDrivingAlarm { get; set; }
+
+        /// <summary>
+        /// 分神驾驶报警前后视频录制时间
+        /// </summary>
+        [JsonProperty("distractAlarmVideoBnA")]
+        public byte VideoRecordingTimeBeforeAndAfterDistractedDrivingAlarm { get; set; }
+
         /// <summary>
         /// 分神驾驶报警拍照张数
         /// </summary>
+        [JsonProperty("distractAlarmPicCnt")]
         public byte DistractedDrivingAlarmPhotography{ get; set; }
+
         /// <summary>
         /// 分神驾驶报警拍照间隔时间
         /// </summary>
+        [JsonProperty("distractAlarmPicIntvl")]
         public byte DistractedDrivingAlarmPhotographyInterval { get; set; }
+
+        /// <summary>
+        /// 驾驶行为异常分级车速阈值
+        /// </summary>
+        [JsonProperty("driverBehaviorAlarmLevelSpdLimit")]
+        public byte ClassifiedSpeedThresholdAbnormalDrivingBehavior { get; set; }
+
         /// <summary>
         /// 驾驶行为异常视频录制时间
         /// </summary>
+        [JsonProperty("driverBehaviorAlarmVideoBnA")]
         public byte VideoRecordingTimeAbnormalDrivingBehavior{ get; set; }
+
         /// <summary>
         /// 驾驶行为异常抓拍照片张数
         /// </summary>
+        [JsonProperty("driverBehaviorAlarmPicCnt")]
         public byte PhotographsAbnormalDrivingBehavior{ get; set; }
+
         /// <summary>
         /// 驾驶行为异常拍照间隔
         /// </summary>
+        [JsonProperty("driverBehaviorAlarmPicIntvl")]
         public byte PictureIntervalAbnormalDrivingBehavior{ get; set; }
+
         /// <summary>
         /// 驾驶员身份识别触发
         /// </summary>
+        [JsonProperty("driverIdentify")]
         public byte DriverIdentificationTrigger { get; set; }
+
         /// <summary>
         /// 保留字段
         /// </summary>
@@ -242,10 +322,14 @@ namespace JT808.Protocol.Extensions.JTActiveSafety.MessageBody
             writer.WriteNumber($"[{value.SmokingAlarmPhotographsDriverFaceCharacteristicsInterval.ReadNumber()}]抽烟报警拍驾驶员面部特征照片间隔时间", value.SmokingAlarmPhotographsDriverFaceCharacteristicsInterval);
             value.ClassifiedSpeedThresholdDistractedDrivingAlarm = reader.ReadByte();
             writer.WriteNumber($"[{value.ClassifiedSpeedThresholdDistractedDrivingAlarm.ReadNumber()}]分神驾驶报警分级车速阈值", value.ClassifiedSpeedThresholdDistractedDrivingAlarm);
+            value.VideoRecordingTimeBeforeAndAfterDistractedDrivingAlarm = reader.ReadByte();
+            writer.WriteNumber($"[{value.VideoRecordingTimeBeforeAndAfterDistractedDrivingAlarm.ReadNumber()}]分神驾驶报警前后视频录制时间", value.VideoRecordingTimeBeforeAndAfterDistractedDrivingAlarm);
             value.DistractedDrivingAlarmPhotography = reader.ReadByte();
             writer.WriteNumber($"[{value.DistractedDrivingAlarmPhotography.ReadNumber()}]分神驾驶报警拍照张数", value.DistractedDrivingAlarmPhotography);
             value.DistractedDrivingAlarmPhotographyInterval = reader.ReadByte();
             writer.WriteNumber($"[{value.DistractedDrivingAlarmPhotographyInterval.ReadNumber()}]分神驾驶报警拍照间隔时间", value.DistractedDrivingAlarmPhotographyInterval);
+            value.ClassifiedSpeedThresholdAbnormalDrivingBehavior = reader.ReadByte();
+            writer.WriteNumber($"[{value.ClassifiedSpeedThresholdAbnormalDrivingBehavior.ReadNumber()}]驾驶行为异常分级速度阈值", value.ClassifiedSpeedThresholdAbnormalDrivingBehavior);
             value.VideoRecordingTimeAbnormalDrivingBehavior = reader.ReadByte();
             writer.WriteNumber($"[{value.VideoRecordingTimeAbnormalDrivingBehavior.ReadNumber()}]驾驶行为异常视频录制时间", value.VideoRecordingTimeAbnormalDrivingBehavior);
             value.PhotographsAbnormalDrivingBehavior = reader.ReadByte();
@@ -290,8 +374,10 @@ namespace JT808.Protocol.Extensions.JTActiveSafety.MessageBody
             value.SmokingAlarmPhotographsDriverFaceCharacteristics = reader.ReadByte();
             value.SmokingAlarmPhotographsDriverFaceCharacteristicsInterval = reader.ReadByte();
             value.ClassifiedSpeedThresholdDistractedDrivingAlarm = reader.ReadByte();
+            value.VideoRecordingTimeBeforeAndAfterDistractedDrivingAlarm = reader.ReadByte();
             value.DistractedDrivingAlarmPhotography = reader.ReadByte();
             value.DistractedDrivingAlarmPhotographyInterval = reader.ReadByte();
+            value.ClassifiedSpeedThresholdAbnormalDrivingBehavior = reader.ReadByte();
             value.VideoRecordingTimeAbnormalDrivingBehavior = reader.ReadByte();
             value.PhotographsAbnormalDrivingBehavior = reader.ReadByte();
             value.PictureIntervalAbnormalDrivingBehavior = reader.ReadByte();
@@ -331,8 +417,10 @@ namespace JT808.Protocol.Extensions.JTActiveSafety.MessageBody
             writer.WriteByte(value.SmokingAlarmPhotographsDriverFaceCharacteristics);
             writer.WriteByte(value.SmokingAlarmPhotographsDriverFaceCharacteristicsInterval);
             writer.WriteByte(value.ClassifiedSpeedThresholdDistractedDrivingAlarm);
+            writer.WriteByte(value.VideoRecordingTimeBeforeAndAfterDistractedDrivingAlarm);
             writer.WriteByte(value.DistractedDrivingAlarmPhotography);
             writer.WriteByte(value.DistractedDrivingAlarmPhotographyInterval);
+            writer.WriteByte(value.ClassifiedSpeedThresholdAbnormalDrivingBehavior);
             writer.WriteByte(value.VideoRecordingTimeAbnormalDrivingBehavior);
             writer.WriteByte(value.PhotographsAbnormalDrivingBehavior);
             writer.WriteByte(value.PictureIntervalAbnormalDrivingBehavior);

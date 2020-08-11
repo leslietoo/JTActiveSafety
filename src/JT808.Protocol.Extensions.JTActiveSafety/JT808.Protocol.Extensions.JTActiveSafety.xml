@@ -840,6 +840,11 @@
             分神驾驶报警分级车速阈值
             </summary>
         </member>
+        <member name="P:JT808.Protocol.Extensions.JTActiveSafety.MessageBody.JT808_0x8103_0xF365.VideoRecordingTimeBeforeAndAfterDistractedDrivingAlarm">
+            <summary>
+            分神驾驶报警前后视频录制时间
+            </summary>
+        </member>
         <member name="P:JT808.Protocol.Extensions.JTActiveSafety.MessageBody.JT808_0x8103_0xF365.DistractedDrivingAlarmPhotography">
             <summary>
             分神驾驶报警拍照张数
@@ -848,6 +853,11 @@
         <member name="P:JT808.Protocol.Extensions.JTActiveSafety.MessageBody.JT808_0x8103_0xF365.DistractedDrivingAlarmPhotographyInterval">
             <summary>
             分神驾驶报警拍照间隔时间
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JTActiveSafety.MessageBody.JT808_0x8103_0xF365.ClassifiedSpeedThresholdAbnormalDrivingBehavior">
+            <summary>
+            驾驶行为异常分级车速阈值
             </summary>
         </member>
         <member name="P:JT808.Protocol.Extensions.JTActiveSafety.MessageBody.JT808_0x8103_0xF365.VideoRecordingTimeAbnormalDrivingBehavior">
@@ -1040,6 +1050,16 @@
         <member name="T:JT808.Protocol.Extensions.JTActiveSafety.Metadata.AlarmIdentificationProperty">
             <summary>
             报警标识号
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JTActiveSafety.Metadata.AlarmIdentificationProperty.RawHex">
+            <summary>
+            原始值，16个字节
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JTActiveSafety.Metadata.AlarmIdentificationProperty.RawString">
+            <summary>
+            原始值，用16进制字符串表示的16个字节，形如F1BA83…
             </summary>
         </member>
         <member name="P:JT808.Protocol.Extensions.JTActiveSafety.Metadata.AlarmIdentificationProperty.TerminalID">
